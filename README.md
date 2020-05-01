@@ -7,19 +7,28 @@
 1. Устанавливаем Docker
 2. Скачиваем Docker образ под ОС которая у вас на проде
 > docker pull *oraclelinux7.5*
-3. Переходим в папку с Dockerfile, и собираем образ с ОС и инструментами для разработки UDF
+3. Переходим в папку с Dockerfile-OS ("-OS" уберите перед запуском), и собираем образ с ОС и инструментами для разработки UDF
 > cd /path
 
 > docker build -t *impala-udf-base* .
 
 4. Создаем новый образ на основе предыдущего образа, где компилируем hash UDF 
+4.1 Перходим в папку с UDF (udfimp)
+> cd /path
+4.2 Клонируем в него репозиторий криптографии
+> git clone https://github.com/weidai11/cryptopp
+4.3 Клонируем в него репозиторий с базовым сэмплом от Cloudera
+> git clone https://github.com/cloudera/impala-udf-samples
+4.4 В папке с Dockerfile-UDF запускаем новую сборку ("-UDF" уберите перед запуском). В результате у вас скомпилируется нужная динамическая библиотека.
 
 5. Создаем и запускаем Docker-контейнер из Docker-образа
 > docker run -it -d --name *имя контейнера* impala-udf-base
 6. Копируем необходимые файлы или папку из контейнера на хост-машину, в нашем случае папка /udfmp/build - там будет сгенерированная динамическая библиотека <b>libudfcrypto.so</b>
 > docker cp *id контейнера*:*/path_docker_container* *"/path_local"*
+
 > cd *"/path_local"*
-7. Копирование с хост-машины в контейнер
+
+7. Копирование с хост-машины в контейнер, в нашем случае надо туда перенести папку impala-udf-master
 > docker cp *"/path_local"* *id контейнера*:*/path_docker_container*
 8. Входим в docker-контейнер
 > docker exec -t -i dd7518a91b66 /bin/bash
