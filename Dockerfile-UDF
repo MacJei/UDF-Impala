@@ -1,0 +1,22 @@
+FROM impala-udf-base:latest
+
+COPY * /udfimp/
+
+RUN set -x \
+	&& echo "[builder]: cmake . && make" \
+	&& cd /udfimp/cryptopp \
+	&& make \
+	&& cd /udfimp \
+	&& cmake . \
+	&& make \
+	&& mkdir /build
+
+RUN set -x \
+	&& echo "[builder]: run all tests" \
+	&& ls -1 /udfimp/build/*-test | xargs -I {} bash -c "echo '{}: ' && {}" 
+
+VOLUME /build
+
+CMD /bin/bash
+
+
