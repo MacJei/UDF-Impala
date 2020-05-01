@@ -1,0 +1,22 @@
+FROM oraclelinux:7.5
+
+ENV IMPALA_UDF_DEV_RPM_URL http://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/5.15.1/RPMS/x86_64/impala-udf-devel-2.12.0+cdh5.15.1+0-1.cdh5.15.1.p0.4.el7.x86_64.rpm
+
+RUN set -x \
+	&& yum install -y \
+		curl \
+		tar \
+		gzip \
+		gcc-c++ \
+		clang \
+		cmake \
+		boost-devel \
+	&& curl ${IMPALA_UDF_DEV_RPM_URL} > impala-udf-devel.x86_64.rpm \
+	&& yum install -y impala-udf-devel.x86_64.rpm \
+	&& rm impala-udf-devel.x86_64.rpm \
+	&& yum clean all
+
+
+CMD ['/bin/bash']
+
+
