@@ -13,12 +13,16 @@
 > docker build -t *impala-udf-base* .
 
 4. Создаем новый образ на основе предыдущего образа, где компилируем hash UDF 
+
 4.1 Перходим в папку с UDF (udfimp)
 > cd /path
+
 4.2 Клонируем в него репозиторий криптографии
 > git clone https://github.com/weidai11/cryptopp
+
 4.3 Клонируем в него репозиторий с базовым сэмплом от Cloudera
 > git clone https://github.com/cloudera/impala-udf-samples
+
 4.4 В папке с Dockerfile-UDF запускаем новую сборку ("-UDF" уберите перед запуском). В результате у вас скомпилируется нужная динамическая библиотека.
 
 5. Создаем и запускаем Docker-контейнер из Docker-образа
