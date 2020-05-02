@@ -5,7 +5,7 @@
 ### И так, для этого нам потребуется установка:
 0. Если у вас ОС Windows, то понадобиться установить программу виртуализации, например, VirtualBox, чтобы развернуть ОС на базе Linux, на Win на мой взгляд, Docker работает неполноценно.
 1. Устанавливаем Docker
-2. Скачиваем Docker образ под ОС которая у вас на проде
+2. Скачиваем Docker образ под ОС, которая у вас на проде
 > docker pull *oraclelinux7.5*
 3. Переходим в папку с Dockerfile-OS ("-OS" уберите перед запуском), и собираем образ с ОС и инструментами для разработки UDF
 > cd /path
@@ -36,4 +36,12 @@
 > docker cp *"/path_local"* *id контейнера*:*/path_docker_container*
 8. Входим в docker-контейнер
 > docker exec -t -i dd7518a91b66 /bin/bash
-9. Далее заходим в нужную папку (impala-udf-master) и компилим cmake . && make
+9. Далее заходим в нужную папку (impala-udf-master) и компилим *cmake . && make* в результате получим несколько .so библиотек для создания пользовательских функций Upper, Lower, String, Date etc.
+10. Переносим полученные .so на прод сервер в папку /user/impala/udfs
+11. Создаем пользовательские функции по аналогии:
+> create function if not exists sha256(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='SHA256'
+
+### Полезные ссылки:
+[Docker](https://community.vscale.io/hc/ru/community/posts/211783625-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-Docker) 
+
+[Hash UDF](https://github.com/ScalefreeCOM/impala-crypto-udf)
