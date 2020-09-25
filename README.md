@@ -24,6 +24,7 @@
 > git clone https://github.com/cloudera/impala-udf-samples
 
 4.4 В папке с Dockerfile-UDF запускаем новую сборку ("-UDF" уберите перед запуском). В результате у вас скомпилируется нужная динамическая библиотека.
+> docker build -t *image name* .
 
 5. Создаем и запускаем Docker-контейнер из Docker-образа
 > docker run -it -d --name *имя контейнера* impala-udf-base
