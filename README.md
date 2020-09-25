@@ -34,13 +34,15 @@
 
 > cd *"/path_local"*
 
+### Далее способ 2
 7. Копирование с хост-машины в контейнер, в нашем случае надо туда перенести папку impala-udf-master
 > docker cp *"/path_local"* *id контейнера*:*/path_docker_container*
 8. Входим в docker-контейнер
 > docker exec -t -i dd7518a91b66 /bin/bash
 9. Далее заходим в нужную папку (impala-udf-master) и компилим *cmake . && make* в результате получим несколько .so библиотек для создания пользовательских функций Upper, Lower, String, Date etc.
 10. Переносим полученные .so на прод сервер в папку /user/impala/udfs
-11. Создаем пользовательские функции по аналогии:
+
+#### Создаем пользовательские функции по аналогии:
 > create function if not exists sha256(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='SHA256'
 
 ### Полезные ссылки:
