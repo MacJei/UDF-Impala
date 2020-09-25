@@ -28,6 +28,8 @@
 5. Создаем и запускаем Docker-контейнер из Docker-образа
 > docker run -it -d --name *имя контейнера* impala-udf-base
 6. Копируем необходимые файлы или папку из контейнера на хост-машину, в нашем случае папка /udfmp/build - там будет сгенерированная динамическая библиотека <b>libudfcrypto.so</b>
+--посмотреть папки в контейнере
+> docker diff udf0
 > docker cp *id контейнера*:*/path_docker_container* *"/path_local"*
 
 > cd *"/path_local"*
