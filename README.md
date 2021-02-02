@@ -49,3 +49,7 @@
 [Docker](https://community.vscale.io/hc/ru/community/posts/211783625-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-Docker) 
 
 [Hash UDF](https://github.com/ScalefreeCOM/impala-crypto-udf)
+
+[Create UDF_1](https://impala.apache.org/docs/build/html/topics/impala_create_function.html)
+
+[Create UDF_1](https://impala.apache.org/docs/build/html/topics/impala_udf.html#udfs)
