@@ -43,7 +43,21 @@
 10. Переносим полученные .so на прод сервер в папку /user/impala/udfs
 
 #### Создаем пользовательские функции по аналогии:
-> create function if not exists sha256(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='SHA256'
+> create function if not exists sha256(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='SHA256';
+> create function if not exists md5(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='MD5';
+> create function if not exists upper_ruutf8(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='upper_ruutf8';
+> create function if not exists lower_ruutf8(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='lower_ruutf8';
+> create function if not exists length_ruutf8_str(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='length_ruutf8_str';
+> create function if not exists substr_ruutf8_str(string,string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='substr_ruutf8_str';
+> create function if not exists substr2_ruutf8_str(string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='substr2_ruutf8_str';
+> create function if not exists translate_ruutf8(string,string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='translate_ruutf8';
+
+#### Примеры select'а:
+select    
+default.length_ruutf8_str("привет мИр"),
+default.substr_ruutf8_str("привет мИр",'1','10'),
+default.substr2_ruutf8_str("привет мИр",'5'),
+default.translate_ruutf8('KFC PRIMORSKAYA  CAFE','qwerенгшщASDFРОЛД','mnbячсмPIIYTЙЦУК')
 
 ### Полезные ссылки:
 [Docker](https://community.vscale.io/hc/ru/community/posts/211783625-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-Docker) 
