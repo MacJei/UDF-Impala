@@ -44,12 +44,19 @@
 
 #### Создаем пользовательские функции по аналогии:
 > create function if not exists sha256(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='SHA256';
+> 
 > create function if not exists md5(string) returns string location '/user/impala/udfs/libudfcrypto.so' SYMBOL='MD5';
+> 
 > create function if not exists upper_ruutf8(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='upper_ruutf8';
+> 
 > create function if not exists lower_ruutf8(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='lower_ruutf8';
+> 
 > create function if not exists length_ruutf8_str(string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='length_ruutf8_str';
+> 
 > create function if not exists substr_ruutf8_str(string,string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='substr_ruutf8_str';
+> 
 > create function if not exists substr2_ruutf8_str(string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='substr2_ruutf8_str';
+> 
 > create function if not exists translate_ruutf8(string,string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='translate_ruutf8';
 
 #### Примеры select'а:
