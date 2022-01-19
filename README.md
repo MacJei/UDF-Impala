@@ -60,11 +60,33 @@
 > create function if not exists translate_ruutf8(string,string,string) returns string location '/user/impala/udfs/libudf-strings.so' SYMBOL='translate_ruutf8';
 
 #### Примеры select'а:
-select    
-default.length_ruutf8_str("привет мИр"),
-default.substr_ruutf8_str("привет мИр",'1','10'),
-default.substr2_ruutf8_str("привет мИр",'5'),
+Нижний/верхний регистр для кириллицы
+
+select
+default.lower_ruutf8("привет валЕт"), 
+default.upper_ruutf8("привет валЕт")
+
+Длина строки для кириллицы
+
+select   
+default.length_ruutf8_str("привет валЕт")
+
+Позволяет извлекать подстроку из строки
+
+select
+default.substr_ruutf8_str("привет валЕт",'1','10'),
+default.substr2_ruutf8_str("привет валЕт",'5')
+
+ Замена символов по маске
+ 
+select   
 default.translate_ruutf8('KFC PRIMORSKAYA  CAFE','qwerенгшщASDFРОЛД','mnbячсмPIIYTЙЦУК')
+
+Хэш-сумма
+
+select   
+default.md5("hive"),
+default.sha256("hive")
 
 ### Полезные ссылки:
 [Docker](https://community.vscale.io/hc/ru/community/posts/211783625-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-Docker) 
